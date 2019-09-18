@@ -1,0 +1,1 @@
+This is the a template of cmake project. Among this template, it can use the different kinds of libraries, such as PCL, OpenMP and OpenCV.
