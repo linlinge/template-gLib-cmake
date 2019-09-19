@@ -1,10 +1,26 @@
 #include "Others.h"
-V3 get_color(float min,float max,float confidence)
+ColorBrush::ColorBrush(vector<double> dat)
+{
+	double min_tmp=INT_MAX;
+	double max_tmp=-INT_MAX;
+	for(int i=0;i<dat.size();i++)
+	{
+		if(min_tmp>dat[i])
+			min_tmp=dat[i];
+		
+		if(max_tmp<dat[i])
+			max_tmp=dat[i];
+	}
+	min_=min_tmp;
+	max_=max_tmp;
+}
+
+V3 ColorBrush::GetColor(double confidence)
 {
 	V3 color_temp;
-	float n=4.0; // 
-	float step=(max-min)/n;
-	float c=confidence-min;
+	double n=4.0; // 
+	double step=(max_-min_)/n;
+	double c=confidence-min_;
 	if(c<step)
 	{
 		color_temp.r=0;

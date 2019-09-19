@@ -1,3 +1,12 @@
 #pragma once
+#include <vector>
 #include "V3.hpp"
-V3 get_color(float min,float max,float confidence);
+using namespace std;
+class ColorBrush
+{
+	public:
+		double min_,max_;
+		
+		ColorBrush(vector<double> dat);
+		V3 GetColor(double confidence);
+};
