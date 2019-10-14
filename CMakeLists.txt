@@ -28,8 +28,8 @@ include_directories("/usr/include/eigen3")
 
 
 ############################################# executable #############################################
-include_directories(gLib .)
-ADD_SUBDIRECTORY(gLib)
+include_directories(glib .)
+ADD_SUBDIRECTORY(glib)
 aux_source_directory(. MAIN_SRC)
 add_executable (template-cmake ${MAIN_SRC})
 
