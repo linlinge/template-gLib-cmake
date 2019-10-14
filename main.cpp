@@ -32,7 +32,7 @@ int main(int argc,char** argv)
 	for(int i=0;i<cloud->points.size();i++){
 		PointType ptmp=cloud->points[i];
 		V3 direction(ptmp.x-centroid[0],ptmp.y-centroid[1],ptmp.z-centroid[2]);
-		direction=direction/direction.Length()*0.005;
+		direction=direction/direction.GetLength()*0.005;
 		
 		 viewer->addArrow<pcl::PointXYZ>(pcl::PointXYZ(ptmp.x+direction.x,ptmp.y+direction.y,ptmp.z+direction.z), pcl::PointXYZ(ptmp.x,ptmp.y,ptmp.z), 1.0f, 0.0f, 0.0f, false, std::to_string(i), 0);
 		//viewer->addArrow<pcl::PointXYZ>(pcl::PointXYZ(1,1,1), pcl::PointXYZ(0,0,0), 1.0f, 0.0f, 0.0f, false, std::to_string(i), 0);
