@@ -8,6 +8,7 @@
 #include <pcl/octree/octree.h>
 #include <pcl/point_cloud.h>
 #include <pcl/visualization/cloud_viewer.h>
+#include <pcl/segmentation/conditional_euclidean_clustering.h>
 #include <omp.h>
 #include <vector>
 #ifndef PointType
