@@ -17,3 +17,4 @@ class Statistics
 		
 		Statistics(vector<float> dat);
 };
+double Quantile(vector<int>& dat,double ratio);
