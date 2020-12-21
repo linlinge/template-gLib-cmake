@@ -97,3 +97,18 @@ void TransformPointCloud(pcl::PointCloud<PointType>::Ptr cloud, pcl::PointCloud<
 		cloud_tf->points[i].z=v2(2,0);
 	}
 }
+
+double GetCellSize(pcl::PointCloud<PointType>::Ptr cloud, int level)
+{
+	PointType pmin,pmax;
+	pcl::getMinMax3D(*cloud,pmin,pmax);
+	double cellsize=MAX3(abs(pmax.x-pmin.x),abs(pmax.y-pmin.y),abs(pmax.z-pmax.z));
+	return cellsize/pow(2,level);
+}
+double GetBoxMin(pcl::PointCloud<PointType>::Ptr cloud)
+{
+	PointType pmin,pmax;
+    pcl::getMinMax3D(*cloud,pmin,pmax);
+	double vmin=MIN3(abs(pmax.x-pmin.x),abs(pmax.y-pmin.y),abs(pmax.z-pmin.z));
+	return vmin;
+}
