@@ -1,4 +1,8 @@
 #include "PCLExtend.h"
+#define MAX2(A,B) ((A)>(B) ? (A):(B))
+#define MAX3(A,B,C) MAX2(MAX2(A,B),C)
+#define MIN2(A,B) ((A)<(B) ? (A):(B))
+#define MIN3(A,B,C) MIN2(MIN2(A,B),C)
 double ComputeMeanDistance(const pcl::PointCloud<PointType>::ConstPtr cloud)
 {
 	double res = 0.0;
