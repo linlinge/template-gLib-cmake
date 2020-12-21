@@ -7,7 +7,6 @@
 #include <pcl/point_types.h>
 #include <opencv2/opencv.hpp>
 #define PI 3.1415926535897
-#define MAX2(a,b) (a>b? a:b)
 #define X_AXIS 0
 #define Y_AXIS 1
 #define Z_AXIS 2
