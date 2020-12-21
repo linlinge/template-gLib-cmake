@@ -19,3 +19,5 @@ double ComputeMeanDistance(const pcl::PointCloud<PointType>::ConstPtr cloud);
 double ComputeMaxDistance(const pcl::PointCloud<PointType>::ConstPtr cloud);
 void TransformPointCloud(pcl::PointCloud<PointType>::Ptr cloud, pcl::PointCloud<PointType>::Ptr cloud_tf,Eigen::Affine3f tf);
 vector<double> StatisticNearestDistance(const pcl::PointCloud<PointType>::ConstPtr cloud);
+double GetCellSize(pcl::PointCloud<PointType>::Ptr cloud, int level);
+double GetBoxMin(pcl::PointCloud<PointType>::Ptr cloud);
