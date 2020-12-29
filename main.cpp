@@ -9,20 +9,28 @@
 #include <pcl/surface/gp3.h>
 #include <Eigen/Dense>
 #include "V3.hpp"
+#include <vector>
+using namespace std;
 typedef pcl::PointXYZRGBA PointType;
 
 int main(int argc,char** argv)
 {
-	pcl::PointCloud<PointType>::Ptr cloud(new pcl::PointCloud<PointType>);
-	Eigen::Vector4f centroid;
-	
-	if (pcl::io::loadPLYFile<PointType>(argv[1], *cloud) == -1) 
-	{
-		PCL_ERROR("Couldn't read file test_pcd.pcd \n");
-		return (-1);
-	}
-	
-    pcl::io::savePCDFileBinary("1.ply",*cloud);	
-	
+	pcl::PointCloud<PointType>::Ptr cloud_without_color(new pcl::PointCloud<PointType>);
+	pcl::PointCloud<PointType>::Ptr cloud_with_color(new pcl::PointCloud<PointType>);		
+	pcl::io::loadPLYFile<PointType>(argv[1], *cloud_without_color); 
+	pcl::io::loadPLYFile<PointType>(argv[2], *cloud_with_color); 
+	pcl::search::KdTree<PointType>::Ptr kdtree(new pcl::search::KdTree<PointType>);
+	kdtree->setInputCloud(cloud_with_color);
+
+	for(int i=0;i<cloud_without_color->points.size();i++){
+		vector<int> idx;
+		vector<float> dist;
+		kdtree->nearestKSearch(cloud_without_color->points[i],1,idx,dist);
+
+		cloud_with_color->points[i].r=cloud_without_color->points[idx[0]].r;
+		cloud_with_color->points[i].g=cloud_without_color->points[idx[0]].g;
+		cloud_with_color->points[i].b=cloud_without_color->points[idx[0]].b;
+	}	
+    pcl::io::savePCDFileBinary("1.ply",*cloud_with_color);		
 	return 0;
 }
