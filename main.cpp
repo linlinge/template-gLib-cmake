@@ -22,39 +22,7 @@ int main(int argc,char** argv)
 		return (-1);
 	}
 	
-    pcl::compute3DCentroid(*cloud, centroid);
+    pcl::io::savePCDFileBinary("1.ply",*cloud);	
 	
-	
-	
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer ("3D Viewer"));
-	
-	
-	for(int i=0;i<cloud->points.size();i++){
-		PointType ptmp=cloud->points[i];
-		V3 direction(ptmp.x-centroid[0],ptmp.y-centroid[1],ptmp.z-centroid[2]);
-		direction=direction/direction.GetLength()*0.005;
-		
-		 viewer->addArrow<pcl::PointXYZ>(pcl::PointXYZ(ptmp.x+direction.x,ptmp.y+direction.y,ptmp.z+direction.z), pcl::PointXYZ(ptmp.x,ptmp.y,ptmp.z), 1.0f, 0.0f, 0.0f, false, std::to_string(i), 0);
-		//viewer->addArrow<pcl::PointXYZ>(pcl::PointXYZ(1,1,1), pcl::PointXYZ(0,0,0), 1.0f, 0.0f, 0.0f, false, std::to_string(i), 0);
-	}
-	
-	  
-	
-	// Set background
-	// viewer->setBackgroundColor (0.33, 0.97, 0.59); 
-	viewer->setBackgroundColor (1.0f, 1.0f, 1.0f);
-
-	//Set multi-color for point cloud
-	pcl::visualization::PointCloudColorHandlerRGBField<PointType> multi_color(cloud);  	
-	
-	//Add the demostration point cloud data
-	viewer->addPointCloud<PointType> (cloud, multi_color, "cloud1");
-
-	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "cloud1");
-
-	while(!viewer->wasStopped()){	
-		viewer->spin();
-		boost::this_thread::sleep (boost::posix_time::microseconds (10));
-	}
 	return 0;
 }
