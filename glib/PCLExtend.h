@@ -12,7 +12,7 @@
 #include <omp.h>
 #include <vector>
 #ifndef PointType
-#define PointType pcl::PointXYZRGB
+#define PointType pcl::PointXYZRGBNormal
 #endif
 using namespace std;
 double ComputeMeanDistance(const pcl::PointCloud<PointType>::ConstPtr cloud);
@@ -21,3 +21,7 @@ void TransformPointCloud(pcl::PointCloud<PointType>::Ptr cloud, pcl::PointCloud<
 vector<double> StatisticNearestDistance(const pcl::PointCloud<PointType>::ConstPtr cloud);
 double GetCellSize(pcl::PointCloud<PointType>::Ptr cloud, int level);
 double GetBoxMin(pcl::PointCloud<PointType>::Ptr cloud);
+
+/* Algorithm Section */
+pcl::PointCloud<PointType>::Ptr LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K=45, double thresh=0.8);
+void RecoverColor(pcl::PointCloud<PointType>::Ptr cloud_without_color,pcl::PointCloud<PointType>::Ptr cloud_with_color);
