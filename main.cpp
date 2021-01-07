@@ -10,8 +10,9 @@ int main(int argc,char** argv)
 	pcl::PointCloud<PointType>::Ptr cloud(new pcl::PointCloud<PointType>);		
 	pcl::PointCloud<PointType>::Ptr cloud_out(new pcl::PointCloud<PointType>);
 	pcl::io::loadPLYFile<PointType>(argv[1], *cloud); 
-	cloud_out=LoOP(cloud);
+	vector<int> idx=LoOP(cloud);
+	subtract_points(cloud,idx);
 	
-    pcl::io::savePLYFileBinary(argv[2],*cloud_out);		
+    pcl::io::savePLYFileBinary(argv[2],*cloud);		
 	return 0;
 }

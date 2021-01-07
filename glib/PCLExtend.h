@@ -3,6 +3,7 @@
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/filters/extract_indices.h>
 #include <pcl/features/normal_3d.h>
 #include <pcl/surface/gp3.h>
 #include <pcl/octree/octree.h>
@@ -23,5 +24,6 @@ double GetCellSize(pcl::PointCloud<PointType>::Ptr cloud, int level);
 double GetBoxMin(pcl::PointCloud<PointType>::Ptr cloud);
 
 /* Algorithm Section */
-pcl::PointCloud<PointType>::Ptr LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K=45, double thresh=0.8);
+vector<int> LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K=45, double thresh=0.8);
 void RecoverColor(pcl::PointCloud<PointType>::Ptr cloud_without_color,pcl::PointCloud<PointType>::Ptr cloud_with_color);
+void subtract_points(pcl::PointCloud<PointType>::Ptr cloud, const vector<int>& indices, bool flag=false);

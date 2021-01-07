@@ -117,7 +117,7 @@ double GetBoxMin(pcl::PointCloud<PointType>::Ptr cloud)
 	return vmin;
 }
 
-pcl::PointCloud<PointType>::Ptr LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K, double thresh)
+vector<int> LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K, double thresh)
 {
 	pcl::PointCloud<PointType>::Ptr cloud_out(new pcl::PointCloud<PointType>);
 	pcl::search::KdTree<PointType>::Ptr kdtree(new pcl::search::KdTree<PointType>);
@@ -177,15 +177,15 @@ pcl::PointCloud<PointType>::Ptr LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, i
         rst_LoOP_[i] = op;
 	}
 
-	#pragma omp parallel for
+	vector<int> idx;
     for(int i=0;i<rst_LoOP_.size();i++){
         if(rst_LoOP_[i]<thresh){
-			cloud_out->points.push_back(cloud_in->points[i]);
+			idx.push_back(i);
 		}                
 	}
 
 	// pcl::io::savePLYFileBinary(path_out,*cloud_out);
-	return cloud_out;
+	return idx;
 }
 
 void RecoverColor(pcl::PointCloud<PointType>::Ptr cloud_without_color,pcl::PointCloud<PointType>::Ptr cloud_with_color)
@@ -205,4 +205,18 @@ void RecoverColor(pcl::PointCloud<PointType>::Ptr cloud_without_color,pcl::Point
 		cloud_without_color->points[i].normal_y=cloud_with_color->points[idx[0]].normal_y;
 		cloud_without_color->points[i].normal_z=cloud_with_color->points[idx[0]].normal_z;
 	}
+}
+
+void subtract_points(pcl::PointCloud<PointType>::Ptr cloud, const vector<int>& indices, bool flag)
+{
+  pcl::PointIndices::Ptr fInliers (new pcl::PointIndices);
+  fInliers->indices = indices;
+  pcl::ExtractIndices<PointType> extract;
+  extract.setInputCloud (cloud);  
+  extract.setIndices (fInliers);
+  if(flag==false)
+  	extract.setNegative(false);
+  else 
+	extract.setNegative(true);
+  extract.filter(*cloud);
 }
