@@ -39,3 +39,18 @@ vector<string> split(string dat, string separator)
 	} while (start != -1);
 	return rst;
 }
+void list_all_files( string path, vector<string>& filepath, vector<string>& filename)
+{
+	vector<string> files;
+   if (auto dir = opendir(path.c_str())) {
+    while (auto f = readdir(dir)) {
+        if (!f->d_name || f->d_name[0] == '.')
+            continue; // Skip everything that starts with a dot
+
+		string str=f->d_name;
+        filepath.push_back(path+"/"+str);
+		filename.push_back(str);
+    }
+    closedir(dir);
+	}
+}
