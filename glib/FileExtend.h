@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <algorithm>
+#include <dirent.h>
 using namespace std;
 void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
