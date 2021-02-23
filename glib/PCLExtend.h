@@ -28,4 +28,4 @@ vector<int> LoOP(pcl::PointCloud<PointType>::Ptr cloud_in, int K=45, double thre
 void RecoverColor(pcl::PointCloud<PointType>::Ptr cloud_without_color,pcl::PointCloud<PointType>::Ptr cloud_with_color);
 void subtract_points(pcl::PointCloud<PointType>::Ptr cloud, const vector<int>& indices, bool flag=false);
 
-void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::PointCloud<PointType>::Ptr acloud, set<int>& indices);
+void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::PointCloud<PointType>::Ptr acloud, vector<int>& indices);
