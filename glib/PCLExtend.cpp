@@ -222,7 +222,7 @@ void subtract_points(pcl::PointCloud<PointType>::Ptr cloud, const vector<int>& i
 }
 
 
-void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::PointCloud<PointType>::Ptr acloud, set<int>& indices)
+void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::PointCloud<PointType>::Ptr acloud, vector<int>& indices)
 {
 	for(int i=0;i<acloud->points.size();i++){
 		vector<float> dist;
