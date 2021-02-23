@@ -93,9 +93,10 @@ void VectorDelete(vector<int>&raw_dat, vector<int>& delete_dat)
 }
 void VectorDifference(vector<int>& dat1,vector<int>& dat2,vector<int>& out)
 {
-    sort(dat1.begin(),dat1.end());
-    sort(dat2.begin(),dat2.end());
-    set_difference(dat1.begin(),dat1.end(),dat2.begin(),dat2.end(),std::back_inserter(out));
+    set<int> st1(dat1.begin(),dat1.end());
+    set<int> st2(dat2.begin(),dat2.end());    
+    set<int> rst;
+    set_difference(st1.begin(),st1.end(),st2.begin(),st2.end(),std::back_inserter(out));
 }
 void VectorUnion(vector<int>& dat1,vector<int>& dat2,vector<int>& out)
 {
