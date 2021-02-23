@@ -220,3 +220,14 @@ void subtract_points(pcl::PointCloud<PointType>::Ptr cloud, const vector<int>& i
 	extract.setNegative(true);
   extract.filter(*cloud);
 }
+
+
+void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::PointCloud<PointType>::Ptr acloud, set<int>& indices)
+{
+	for(int i=0;i<acloud->points.size();i++){
+		vector<float> dist;
+		vector<int> idx;
+		kdtree->nearestKSearch(acloud->points[i],1,idx,dist);		
+		indices.insert(idx[0]);
+	}
+}
