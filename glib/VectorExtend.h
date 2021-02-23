@@ -4,6 +4,7 @@
 #include <vector>
 #include <limits.h>
 #include <algorithm>
+#include <set>
 using namespace std;
 double VectorMean(vector<double>& dat);
 double VectorMaximum(vector<double>& dat);
