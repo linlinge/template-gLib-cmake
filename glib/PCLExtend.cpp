@@ -228,6 +228,6 @@ void FindCorrespondingIndices(pcl::search::KdTree<PointType>::Ptr kdtree, pcl::P
 		vector<float> dist;
 		vector<int> idx;
 		kdtree->nearestKSearch(acloud->points[i],1,idx,dist);		
-		indices.insert(idx[0]);
+		indices.push_back(idx[0]);
 	}
 }
